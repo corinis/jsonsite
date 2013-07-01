@@ -1,0 +1,73 @@
+<html>
+<head>
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="js/handlebars-1.0.rc.1.js"></script>
+	<script src="js/jquery.simpledateformat.js"></script>
+	<script src="js/jquery.jsForm.1.0.rc.1.min.js"></script>
+	
+	<script src="js/jsonSite.js"></script>
+	<script>
+	$(function() {
+		// init the json site
+		$("#page").jsonSite({
+			tplUri: "modules/",
+			data: {
+				user: { name: "test", address: {street: "kundratstrasse" }}
+			}
+		});
+		
+		$("#up1").click(function(){
+			$("#page").jsonSite("update", { user: {
+				name: "test1",
+				age: 23
+			}});
+		});
+
+		$("#up2").click(function(){
+			$("#page").jsonSite("update", {user: {name: "test2"}});
+		});
+
+		$("#up3").click(function(){
+			$("#page").jsonSite("update", {user: {age: 28}});
+		});
+
+		$("#up4").click(function(){
+			$("#page").jsonSite("update", {user: {address: {
+				country: "austria",
+				city: "Wien"
+			}}});
+		});
+
+		$("#up5").click(function(){
+			$("#page").jsonSite("update", {user: {groups: [{id:1, name:"cool"},{id:2, name:"user"}] }});
+		});
+
+		$("#up6").click(function(){
+			$("#page").jsonSite("update", {user: {groups: [{id:1, name:"hey"},{id:3, name:"admin"}] }});
+		});
+
+		$("#up7").click(function(){
+			$("#page").jsonSite("update", {user: {groups: [{id:2}] }});
+		});
+		
+	});
+	</script>
+
+</head>
+
+<body>
+<div id="page">
+	<div id="top" class="module" data-config='{"template":"top.mustache","data":{"user":"user"}}'>Top</div>
+	<div id="main" class="module" data-config='{"template":"main.mustache","data":{"address":"user.address"}}'>main</div>
+</div>
+<button id="up1">Update1: name=test1 + age</button>
+<button id="up2">Update2: name=test2</button>
+<button id="up3">Update3: age: 28</button>
+<button id="up4">Update4: add austria+vienna</button>
+<button id="up5">Update5: add array</button>
+<button id="up6">Update6: modify array</button>
+<button id="up7">Update7: remove id=2</button>
+</body>
+
+</html>
